@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from locator import active_facility_id_name, match_facility_name, match_institution_name, match_institution_id
 from PIL import Image, ImageTk
-from rrule_graphing import *
+from graphing_analytics import *
 
 # Function to filter combobox options based on input
 def search(event):
