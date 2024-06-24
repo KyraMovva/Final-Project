@@ -1,0 +1,68 @@
+id,institution_name,institution_subdomain,timezone_id,created_at,created_by_user_id,updated_at,deactivated_at,is_active,institution_type
+13,CarePredict Prod - INTERNAL,cp,87,2015-08-04 0:01:37,10061,2023-10-26 13:33:18,,1,0
+32,LifeWell Senior Living,lifewell,87,2016-11-21 12:58:56,,2024-03-04 16:13:21,,1,0
+1006,CPTest - INTERNAL,cptest,133,2018-03-29 0:07:11,,2020-06-10 7:44:05,,1,0
+1011,CarePredict Innovations - INTERNAL,training,152,2018-06-19 20:03:47,,2023-09-05 14:38:25,,1,0
+1013,All Seasons,allseas,133,2018-10-09 18:48:47,,2024-03-25 22:38:25,,1,0
+1019,Grand Retirement,grandretirement,87,2019-01-16 18:52:27,,2020-06-10 7:29:43,,1,0
+1022,Tradition Senior Living,tradition,87,2019-04-10 12:34:29,,2020-06-10 7:28:24,,1,0
+1028,"Retirement Unlimited, Inc.",rui,152,2019-07-02 16:05:53,,2022-01-18 14:15:55,,1,0
+1029,Aspen Creek Senior Living,aspencreek,53,2019-09-10 14:23:05,,2020-06-10 7:26:51,,1,0
+1032,Menlopark prod - INTERNAL,menloparkprod,247,2019-11-15 15:50:15,,2022-11-24 9:28:34,,1,1
+1033,Lutheran Social Services,lutheran,152,2019-11-21 20:48:18,,2020-06-10 7:26:05,,1,0
+1049,No Place Like Home - INTERNAL,noplacelikehome,133,2020-02-01 22:55:57,,2020-06-10 7:40:20,,1,1
+1061,Home Sweet Home - INTERNAL,homesweethome,96,2020-03-04 23:51:32,,2020-06-10 7:36:56,,1,1
+1068,Solera Senior Living,solera,96,2020-03-24 14:45:24,,2020-06-10 7:22:18,,1,0
+1070,Solterra Senior Living,solterra,163,2020-05-28 21:04:01,,2020-06-10 5:55:37,,1,0
+1071,WellQuest,wellquest,133,2020-07-08 23:37:00,,,,1,0
+1072,Middle Alabama Area Agency on Aging,middleaaaa,87,2020-07-20 20:40:20,,2022-04-28 17:32:02,,1,1
+1076,Lighthouse PCH (RAL),lighthousepch,152,2020-09-11 19:43:09,,2024-02-22 19:49:43,,1,2
+1077,Atria Senior Living,atria,152,2020-10-05 23:35:40,,,,1,0
+1079,Bickford Senior Living,bickford,87,2020-11-20 18:04:17,,2020-11-20 18:28:42,,1,0
+1082,Aravilla,aravilla,152,2021-01-08 19:00:09,,2021-01-09 12:02:35,,1,0
+1083,Silverado,silverado,133,2021-01-15 19:51:54,,2024-04-12 18:16:57,,1,0
+1085,RAL Demo,raldemo,133,2021-03-04 18:49:17,,2023-09-05 14:09:01,,1,0
+1086,Affectionate Care (RAL),affectionatecare,87,2021-04-08 22:23:38,,2024-02-22 19:47:36,,1,0
+1087,YewTree Senior Living,villageatsugarland,87,2021-04-13 20:19:22,,2024-02-22 19:59:24,,1,0
+1088,New Hope (RAL),newhope,152,2021-05-27 16:01:25,,2024-02-22 19:50:09,,1,0
+1091,Westminster Communities of FL,westminster,152,2021-05-27 16:21:12,,2024-03-04 17:01:15,,1,0
+1092,Remember Me,remember,152,2021-05-27 16:29:26,,2021-09-08 19:39:39,,1,0
+1094,Raya&#39;s Paradise,rayas,133,2021-05-27 16:39:25,,2021-12-09 0:15:01,,1,0
+1096,STINSOFT - INTERNAL,stinsoft,247,2021-06-23 5:31:49,,2024-05-18 6:11:11,,1,2
+1099,Camella Living (RAL),camella,116,2021-09-02 15:16:22,,2024-02-22 19:48:19,,1,0
+1100,Rosette (RAL),rosette,152,2021-10-14 17:19:36,,2024-02-22 20:11:00,,1,0
+1101,Rosemary Health (RAL),rosemary,87,2021-11-22 2:42:11,,2024-02-22 20:11:24,,1,0
+1103,BrightStar Care,brightstar,152,2022-01-03 19:57:56,,,,1,1
+1104,HomeMatters,homematters,96,2022-01-04 17:12:50,,,,1,1
+1106,Maple Knoll Communities,mkc,116,2022-01-17 18:16:42,,2022-01-17 21:38:36,,1,0
+1110,Central Alabama Aging Consortium,caac,87,2022-03-16 18:24:24,,,,1,1
+1111,Presbyterian Villages of Michigan,pvm,152,2022-04-15 20:01:29,,2022-04-18 10:02:37,,1,0
+1112,CP Plantation office - Agency,cpplant,152,2022-04-28 16:09:08,,2022-11-22 20:08:59,,1,1
+1113,IntegraCare,integracare,152,2022-05-02 18:28:50,,,,1,0
+1114,Tilden Memory Care (RAL),tildenmemorycare,152,2022-09-07 13:50:12,,2024-02-22 19:55:40,,1,0
+1115,Comfort and Love (RAL),comfortandlove,87,2022-09-08 20:06:18,,2024-02-22 19:48:44,,1,0
+1116,Silverleaf Eldercare,silverleaf,87,2022-10-04 15:35:57,,,,1,0
+1117,Babar Agency Testing,babarag,152,2022-10-21 20:56:03,,,,1,1
+1118,CP - StinSoft,cpstinsoft,247,2022-10-26 11:47:41,,2023-10-17 8:45:35,,1,1
+1119,HME Care,hmecare,87,2022-11-04 18:31:48,,2023-09-22 19:52:45,,1,0
+1120,Paradise Pointe,paradisepointefl,116,2022-11-04 18:52:35,,,,1,0
+1121,Arden Rose (RAL),ardenroseseniorliving,87,2022-12-14 21:56:50,,2024-02-22 19:47:52,,1,0
+1122,Vista Prairie,vistaprairie,87,2023-01-11 21:32:32,10821,,,1,0
+1124,SPIRIT Care Homes (RAL),spiritcarehomes,87,2023-01-24 17:24:38,10821,2024-02-22 19:55:16,,1,0
+1125,Rhoda Goldman Plaza,rgplaza,133,2023-02-09 21:23:46,10821,,,1,0
+1126,Blakeford Senior Life,blakeford,87,2023-04-26 18:34:15,10821,,,1,0
+1127,Life Care Services,asca,152,2023-05-15 16:05:59,10821,2024-03-20 16:16:15,,1,0
+1129,Waterman Communities (RAL),springwater,152,2023-06-16 20:18:34,10821,2024-03-04 16:38:40,,1,0
+1130,StinsoftTech - INTERNAL,stinsofttech,96,2023-06-23 10:33:29,27007,2024-05-18 6:12:08,,1,2
+1131,Edgewood Healthcare,edgewood,87,2023-07-19 16:54:34,10821,2023-08-11 19:13:46,,1,0
+1132,Evermore Living,evermore,96,2023-08-10 18:18:57,10821,,,1,0
+1133,ElevateBiz - INTERNAL,elevate,87,2023-08-14 4:07:31,27003,2023-08-14 4:10:08,,1,0
+1134,LiveWell Dementia Specialists,livewell,152,2023-09-15 21:08:15,10821,2024-02-22 19:28:58,,1,0
+1135,Rutronik Health,rutronik,317,2023-09-26 20:29:15,10821,2023-10-03 14:31:42,,1,0
+1136,Autumn Trace,autumntrace,116,2023-09-29 20:11:11,10821,2024-03-04 17:08:03,,1,0
+1137,Lifespace,lifespace,87,2023-10-19 21:33:55,10821,,,1,0
+1138,PACE Southeast Michigan,pacesemichigan,152,2023-11-28 22:47:40,10824,2023-11-28 22:58:33,,1,0
+1139,Résidence Plantzette,plantzette,317,2024-01-11 19:06:35,10821,2024-04-12 17:26:45,,1,2
+1140,Innovated Senior,innovated,152,2024-04-12 21:58:45,10824,,,1,0
+1141,Alterszentrum ESPLANADE,alterszentrum,317,2024-04-15 19:17:10,10824,,,1,2
+1142,Colisee,colisee,317,2024-04-24 22:49:27,10824,,,1,2
