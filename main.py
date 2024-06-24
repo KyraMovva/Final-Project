@@ -107,4 +107,3 @@ image_label.pack(pady=20)
 
 # Start the main tkinter event loop
 root.mainloop()
-
