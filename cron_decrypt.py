@@ -15,8 +15,10 @@ def handling_question_marks(str_cron):
 # Checks if there are years in the expression. If there are, creates a list of acceptable years.
 def handling_years(str_cron):
     global years
-    check = 0
+    check = 0  # checks if there is or isn't a year
     split_cron = str_cron.split(' ')
+    # None of the other categories can have inputs linger than 3 characters
+    # Sets Check to 1 if there are 4 or more characters in a row not separated by a - or ,
     check_list = []
     for num in split_cron[-1]:
         if num == ',' or num == '-':
@@ -29,6 +31,7 @@ def handling_years(str_cron):
             check_list.append(num)
     if len(check_list) > 3:
         check = 1
+    # If the expression does include years, all the acceptable years are added to the list years
     if check == 1:
         if "," in split_cron[-1]:
             split_cron2 = split_cron[-1].split(",")
@@ -60,7 +63,7 @@ def handling_years(str_cron):
 # If there are seconds in the expression, it puts them at the end because that's how croniter takes them
 def handling_seconds(str_cron):
     split_cron = str_cron.split(' ')
-    if len(split_cron) > 5:
+    if len(split_cron) > 5:  # Checks for seconds using length as years were already dealt with
         seconds = split_cron[0]
         split_cron.pop(0)
         split_cron.append(seconds)
@@ -68,7 +71,7 @@ def handling_seconds(str_cron):
     return str_cron
 
 
-# Handles L
+# Handles possible different values for the day of the week
 def handling_day_of_week(str_cron):
     split_cron = str_cron.split(' ')
     if split_cron[4] == '1':
@@ -95,6 +98,7 @@ def handling_day_of_week(str_cron):
     return str_cron
 
 
+# Handles use of W if it's there
 def handling_w(str_cron):
     w_use = str_cron.split(" ")[2]
     if 'W' in w_use:
@@ -121,6 +125,7 @@ def handling_w(str_cron):
     return str_cron.replace(w_use, '*')
 
 
+# runs all the previous functions and returns a set of occurrences that fulfill the criteria
 def count_cron_occurrences(str_cron, start_date):
     start_date = parser.parse(start_date)
     str_cron = handling_question_marks(str_cron)
@@ -129,50 +134,40 @@ def count_cron_occurrences(str_cron, start_date):
     str_cron = handling_day_of_week(str_cron)
     str_cron = handling_w(str_cron)
 
+    # If the expression was set to start after 30 days ago, it starts counting from the start date instead
     days_30 = now + dt.timedelta(days=-30, hours=0)
     if start_date > days_30:
         days_30 = start_date
 
-    first_occurrence = cr.croniter(str_cron, days_30)
-    occurrences_set = {}
-    occurrences_set = set(occurrences_set)
+    first_occurrence = cr.croniter(str_cron, days_30)  # starts off the loop
+    occurrences_set = {}  # initializes the set
+    occurrences_set = set(occurrences_set)  # forces into a set rather than a dict
     count = 0
 
     while True:
-        next_date = first_occurrence.get_next(dt.datetime)
+        next_date = first_occurrence.get_next(dt.datetime)  # finds the next date after the first time
         if next_date > now:
             break
         if next_date >= days_30:
-            if len(years) > 0:
-                if len(w_list) != 0:
-                    if next_date.year in years and next_date.date() in w_list:
+            if len(years) > 0:  # If there were years in the expression
+                if len(w_list) != 0:  # If there was a W in the expression
+                    if next_date.year in years and next_date.date() in w_list:  # Checks against the acceptable years and weekdays
                         occurrences_set.add(next_date)
                         count += 1
-                else:
-                    if next_date.year in years:
+                else:  # If there wasn't a W in the expression
+                    if next_date.year in years:  # Checks against acceptable years
                         occurrences_set.add(next_date)
                         count += 1
-            else:
-                if len(w_list) != 0:
-                    if next_date.date() in w_list:
+            else:  # If there weren't years in the expression
+                if len(w_list) != 0:  # If there was a W in the expression
+                    if next_date.date() in w_list: # Checks against acceptable weekdays
+
                         occurrences_set.add(next_date)
                         count += 1
-                else:
+                else:  # If there wasn't a W in the expression
                     occurrences_set.add(next_date)
                     count += 1
+    # COMMENTED OUT CODE
     # for occurrence in occurrences_set:
     #     print(occurrence)
-    print(count)
     return count
-    # return occurrences_set
-    # if you want the count as well
-    # return occurrences_set, count
-
-
-# # Test:
-# str_cron = '0 30 9 * * ?'
-# try:
-#     print(count_cron_occurrences(str_cron, '6/13/2024 0:00:56'))
-# except Exception as err:
-#     print("Error:" + str(err) + "\nwith " + str_cron)
-# #  use new_set = set1.union(set2) to join all the sets
