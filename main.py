@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from locator import active_facility_id_name, match_facility_name, match_institution_name, match_institution_id
 from PIL import Image, ImageTk
-from graphing_analytics import *
+from rrule_graphing import *
 
 # Function to filter combobox options based on input
 def search(event):
@@ -39,23 +39,26 @@ def click():
     label2_text.set("")
     sv = var.get().strip()
     if not sv:
+        print("all nothign")
         img = update_graph(all_image_buf)
+        img = resize_img(img)
         image_label = tk.Label(root, image=img)
-    try:
-        selected_value = int(sv.split(" ")[0])
-        facility_name_var.set(f"{match_facility_name(selected_value)}")
-        institution_name_var.set(f"{match_institution_name(selected_value)}")
-        institution_id_var.set(f"{match_institution_id(selected_value)}")
+    else:
+        try:
+            selected_value = int(sv.split(" ")[0])
+            facility_name_var.set(f"{match_facility_name(selected_value)}")
+            institution_name_var.set(f"{match_institution_name(selected_value)}")
+            institution_id_var.set(f"{match_institution_id(selected_value)}")
 
-        # Update label2 text
-        label2_text.set(f"Facility Name: {facility_name_var.get()}   Facility ID: {selected_value}   Institution Name: {institution_name_var.get()}   Institution ID: {institution_id_var.get()}")
-        img = update_graph(init(selected_value))
-        image_label = tk.Label(root, image=img)
-        # Show label2
-        label2.pack()
-    except Exception as e:
-        print(e)
-        messagebox.showwarning("Entry not found", f"{sv} is not available as a facility.")
+            # Update label2 text
+            label2_text.set(f"Facility Name: {facility_name_var.get()}   Facility ID: {selected_value}   Institution Name: {institution_name_var.get()}   Institution ID: {institution_id_var.get()}")
+            img = update_graph(init(selected_value))
+            image_label = tk.Label(root, image=img)
+            # Show label2
+            label2.pack()
+        except Exception as e:
+            print(e)
+            messagebox.showwarning("Entry not found", f"{sv} is not available as a facility.")
 
 
 # Create main window
@@ -107,3 +110,4 @@ image_label.pack(pady=20)
 
 # Start the main tkinter event loop
 root.mainloop()
+
