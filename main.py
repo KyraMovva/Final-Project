@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+
 from locator import active_facility_id_name, match_facility_name, match_institution_name, match_institution_id
 from PIL import Image, ImageTk
-from rrule_graphing import *
+import webbrowser
+from graphing_analytics import *
 
 # Function to filter combobox options based on input
 def search(event):
@@ -32,6 +34,30 @@ def resize_img(img):
     new_size = (1000, 1000)
     resized_image = img.resize(new_size, Image.LANCZOS)
     img = ImageTk.PhotoImage(resized_image)
+    canvas = tk.Canvas(root, width=1000, height=1000)  # Adjust canvas size as needed
+    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+    # Create Scrollbars
+    h_scrollbar = tk.Scrollbar(root, orient=tk.HORIZONTAL, command=canvas.xview)
+    h_scrollbar.pack(side=tk.BOTTOM, fill=tk.X)
+
+    v_scrollbar = tk.Scrollbar(root, orient=tk.VERTICAL, command=canvas.yview)
+    v_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+
+    # Configure canvas scrolling
+    canvas.configure(xscrollcommand=h_scrollbar.set, yscrollcommand=v_scrollbar.set)
+
+    # Create an image on the canvas
+    canvas_image = canvas.create_image(0, 0, anchor=tk.N, image=img)
+
+    # Configure the scroll region
+    canvas.config(scrollregion=canvas.bbox(tk.ALL))
+
+    link = tk.Label(root, text="Link to the graph", font=('Helveticabold', 15), fg="blue", cursor="hand2")
+    link.pack()
+    link.bind("<Button-1>", lambda e: display_graph("https://www.google.com/"))
+    canvas.create_window(10, 10, anchor=tk.N, window=link)
     return img
 
 
@@ -39,31 +65,28 @@ def click():
     label2_text.set("")
     sv = var.get().strip()
     if not sv:
-        print("all nothign")
         img = update_graph(all_image_buf)
-        img = resize_img(img)
         image_label = tk.Label(root, image=img)
-    else:
-        try:
-            selected_value = int(sv.split(" ")[0])
-            facility_name_var.set(f"{match_facility_name(selected_value)}")
-            institution_name_var.set(f"{match_institution_name(selected_value)}")
-            institution_id_var.set(f"{match_institution_id(selected_value)}")
+    try:
+        selected_value = int(sv.split(" ")[0])
+        facility_name_var.set(f"{match_facility_name(selected_value)}")
+        institution_name_var.set(f"{match_institution_name(selected_value)}")
+        institution_id_var.set(f"{match_institution_id(selected_value)}")
 
-            # Update label2 text
-            label2_text.set(f"Facility Name: {facility_name_var.get()}   Facility ID: {selected_value}   Institution Name: {institution_name_var.get()}   Institution ID: {institution_id_var.get()}")
-            img = update_graph(init(selected_value))
-            image_label = tk.Label(root, image=img)
-            # Show label2
-            label2.pack()
-        except Exception as e:
-            print(e)
-            messagebox.showwarning("Entry not found", f"{sv} is not available as a facility.")
+        # Update label2 text
+        label2_text.set(f"Facility Name: {facility_name_var.get()}   Facility ID: {selected_value}   Institution Name: {institution_name_var.get()}   Institution ID: {institution_id_var.get()}")
+        img = update_graph(init(selected_value))
+        image_label = tk.Label(root, image=img)
+        # Show label2
+        label2.pack()
+    except Exception as e:
+        print(e)
+        messagebox.showwarning("Entry not found", f"{sv} is not available as a facility.")
 
 
 # Create main window
 root = tk.Tk()
-root.geometry("1000x700")
+root.geometry("1020x1000")
 root.title("Facility Statistics")
 
 
@@ -74,7 +97,7 @@ options = active_facility_id_name()
 frame1 = tk.Frame(root)
 frame1.pack(pady=20)
 
-label = tk.Label(frame1, text="Please choose a facility:")
+label = tk.Label(frame1, text="Please type in the facility id (numerical digits only): ")
 label.pack()
 
 var = tk.StringVar()
@@ -105,9 +128,10 @@ img = Image.open(all_image_buf)
 # img = Image.open(init("1152"))
 img = resize_img(img)
 # Create a label to display the image
-image_label = tk.Label(root, image=img)
-image_label.pack(pady=20)
+"""image_label = tk.Label(root, image=img)
+image_label.pack(pady=20)"""
+def display_graph(url):
+   webbrowser.open_new_tab(url)
 
-# Start the main tkinter event loop
 root.mainloop()
 
