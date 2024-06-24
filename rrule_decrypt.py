@@ -1,38 +1,36 @@
-#import necessary packages
-from csvfunctions import *
-
-combined_to_file()
-#find the path of the excel file from desktop
-csv_file = "active_sites.csv"
-#read the the excel file
-df = pd.read_csv(csv_file)
-
-#get rid of whitespace from column names
-df.columns = df.columns.str.strip()
-
-#accessing columns
-column1_data = df["facility_id"]
-column2_data = df["facility_name"]
-column3_data = df["institution_id"]
-column4_data = df["institution_name"]
+import datetime as dt
+from dateutil import rrule, parser
 
 
-#define the match function
-def match_institution_id(facility_id):
-    filtered_df = df[df['facility_id'] == facility_id]
-    institution_id = filtered_df.iloc[:, -2:-1].values[0]
+def get_occurrences(rrule_string, dtstart_string):
+    total = 0
+    try:
+        # Parse the DTSTART string
+        dtstart_string = str(dtstart_string)
+        dtstart = parser.parse(dtstart_string.split(':')[1])
 
-    return institution_id[0]
+        # Parse the recurrence rule string
+        rule = rrule.rrulestr(rrule_string, dtstart=dtstart)
+
+        # Get occurrences until today (as an aware datetime)
+        now = dt.datetime.now(dtstart.tzinfo)
+        days_30 = now + dt.timedelta(days=-30, hours=0)
+
+        total = 0
+        # Print each occurrence
+        for occurrence in rule:
+            if occurrence > days_30:
+                if occurrence > now:
+                    break
+                total += 1
+                #print(occurrence)
+        # print(total)
+        return total
+
+    except Exception as err:
+        print("Error:" + str(err) + "\nwith " + str(rrule_string) + " at " + str(dtstart_string))
 
 
-def match_institution_name(facility_id):
-    filtered_df = df[df['facility_id'] == facility_id]
-
-    institution_name = filtered_df.iloc[:, -1:].values[0]
-    return institution_name[0]
-
-def match_facility_name(facility_id):
-    filtered_df = df[df['facility_id'] == facility_id]
-    facility_name = filtered_df.iloc[:, -3:-1].values[0]
-
-    return facility_name[0]
+#
+# # Test:
+# get_occurrences('RRULE:FREQ=DAILY;BYHOUR=10;BYMINUTE=00;COUNT=1', 'DTSTART:20230105T091200Z')
