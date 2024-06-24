@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-
 from locator import active_facility_id_name, match_facility_name, match_institution_name, match_institution_id
 from PIL import Image, ImageTk
-import webbrowser
 from graphing_analytics import *
 
 # Function to filter combobox options based on input
@@ -34,30 +32,6 @@ def resize_img(img):
     new_size = (1000, 1000)
     resized_image = img.resize(new_size, Image.LANCZOS)
     img = ImageTk.PhotoImage(resized_image)
-    canvas = tk.Canvas(root, width=1000, height=1000)  # Adjust canvas size as needed
-    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-    # Create Scrollbars
-    h_scrollbar = tk.Scrollbar(root, orient=tk.HORIZONTAL, command=canvas.xview)
-    h_scrollbar.pack(side=tk.BOTTOM, fill=tk.X)
-
-    v_scrollbar = tk.Scrollbar(root, orient=tk.VERTICAL, command=canvas.yview)
-    v_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-
-    # Configure canvas scrolling
-    canvas.configure(xscrollcommand=h_scrollbar.set, yscrollcommand=v_scrollbar.set)
-
-    # Create an image on the canvas
-    canvas_image = canvas.create_image(0, 0, anchor=tk.N, image=img)
-
-    # Configure the scroll region
-    canvas.config(scrollregion=canvas.bbox(tk.ALL))
-
-    link = tk.Label(root, text="Link to the graph", font=('Helveticabold', 15), fg="blue", cursor="hand2")
-    link.pack()
-    link.bind("<Button-1>", lambda e: display_graph("https://www.google.com/"))
-    canvas.create_window(10, 10, anchor=tk.N, window=link)
     return img
 
 
@@ -86,7 +60,7 @@ def click():
 
 # Create main window
 root = tk.Tk()
-root.geometry("1020x1000")
+root.geometry("1000x700")
 root.title("Facility Statistics")
 
 
@@ -97,7 +71,7 @@ options = active_facility_id_name()
 frame1 = tk.Frame(root)
 frame1.pack(pady=20)
 
-label = tk.Label(frame1, text="Please type in the facility id (numerical digits only): ")
+label = tk.Label(frame1, text="Please choose a facility:")
 label.pack()
 
 var = tk.StringVar()
@@ -128,10 +102,8 @@ img = Image.open(all_image_buf)
 # img = Image.open(init("1152"))
 img = resize_img(img)
 # Create a label to display the image
-"""image_label = tk.Label(root, image=img)
-image_label.pack(pady=20)"""
-def display_graph(url):
-   webbrowser.open_new_tab(url)
+image_label = tk.Label(root, image=img)
+image_label.pack(pady=20)
 
+# Start the main tkinter event loop
 root.mainloop()
-
