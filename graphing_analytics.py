@@ -5,6 +5,7 @@ import plotly.express as px
 import plotly.subplots as sp
 import csvfunctions as csvf
 import io
+from dash import Dash, dcc, html
 
 
 def finding_rows_facility_id(keyword):
@@ -31,7 +32,8 @@ def comparing_alerts(df, typer):
         alert_list = list(df['report_file_name'])
     else:
         alert_list = list(df['file_name'])
-        
+
+    csvf.create_unique_report_names()
     combined_alerts = pd.read_csv("report_names.csv")
 
     valid_alerts = []
@@ -157,23 +159,21 @@ def all_fac_id_rrule(df):
         for j in combined_alerts:
             rrule_df[i].append(0)
 
+    results = []
     for i in facility_ids:
-        mask = df['facility_id'].isin([int(i)])
-        masked_df = df[mask]
-        valid_reports = comparing_alerts(masked_df, "r")
-        valid_cron_reports = comparing_alerts(masked_df, "c")
-        valid_reports.extend(valid_cron_reports)
+        masked_df = df[df['facility_id'] == int(i)]
+        valid_reports = comparing_alerts(masked_df, "r") + comparing_alerts(masked_df, "c")
         for j in valid_reports:
             rep_ind = combined_alerts.index(j)
-            rp_lst = rrule_df[i]
-            rp_lst[rep_ind] += 1
+            rrule_df[i][rep_ind] += 1
     final_df = pd.DataFrame(rrule_df)
     return final_df
 
 
 
+app = Dash(__name__)
+
 def init(keyword):
-    csvf.create_unique_report_names()
     indiv, final_df = finding_rows_facility_id(keyword)
 
     if indiv:
@@ -187,17 +187,11 @@ def init(keyword):
             fig1 = px.bar(rrule_df[skip::interval], x="Reports", y="Occurrences", color="Facilities", barmode="group")
             skip += 1
 
-            fig1_trace = []
-
-            for trace in range(len(fig1["data"])):
-                fig1_trace.append(fig1["data"][trace])
-
-            for traces in fig1_trace:
-                final_fig.add_trace(traces, row=skip, col=1)
+            for trace in fig1.data:
+                final_fig.add_trace(trace, row=i+1, col=1)
 
         final_fig.update_traces(width=0.05)
         final_fig.update_layout(height=3600, width=2400, title_text="Total Facility With Occurrences", showlegend=False)
-    # final_fig.show()
 
     img_buf = io.BytesIO()
     final_fig.write_image(img_buf, format='png')
@@ -205,5 +199,9 @@ def init(keyword):
     return img_buf
 
 
-# init("all")
+app.layout = html.Div([
+    dcc.Graph(id='graph')
+])
+
+app.run_server(debug=True, host="localhost", port=8080)
 
