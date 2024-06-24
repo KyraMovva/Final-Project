@@ -31,8 +31,7 @@ def comparing_alerts(df, typer):
         alert_list = list(df['report_file_name'])
     else:
         alert_list = list(df['file_name'])
-
-    csvf.create_unique_report_names()
+        
     combined_alerts = pd.read_csv("report_names.csv")
 
     valid_alerts = []
@@ -174,6 +173,7 @@ def all_fac_id_rrule(df):
 
 
 def init(keyword):
+    csvf.create_unique_report_names()
     indiv, final_df = finding_rows_facility_id(keyword)
 
     if indiv:
