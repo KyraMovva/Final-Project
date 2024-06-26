@@ -135,7 +135,7 @@ def count_cron_occurrences(str_cron, start_date):
     str_cron = handling_w(str_cron)
 
     # If the expression was set to start after 30 days ago, it starts counting from the start date instead
-    days_30 = now + dt.timedelta(days=-30, hours=0)
+    days_30 = now + dt.timedelta(days=-365, hours=0)
     if start_date > days_30:
         days_30 = start_date
 
@@ -167,7 +167,4 @@ def count_cron_occurrences(str_cron, start_date):
                 else:  # If there wasn't a W in the expression
                     occurrences_set.add(next_date)
                     count += 1
-    # COMMENTED OUT CODE
-    # for occurrence in occurrences_set:
-    #     print(occurrence)
     return count
