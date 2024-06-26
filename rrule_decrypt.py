@@ -16,7 +16,7 @@ def get_occurrences(rrule_string, dtstart_string):
         # finds today's date in the time zone of the dtstart
         # https://dateutil.readthedocs.io/en/stable/parser.html
         now = dt.datetime.now(dtstart.tzinfo)
-        days_30 = now + dt.timedelta(days=-30, hours=0)
+        days_30 = now + dt.timedelta(days=-365, hours=0)
 
         total = 0
         # Print each occurrence if it is after 30 days ago
