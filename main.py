@@ -99,7 +99,6 @@ label2 = tk.Label(frame2, textvariable=label2_text, wraplength=700)
 
 all_image_buf = init("all")
 img = Image.open(all_image_buf)
-# img = Image.open(init("1152"))
 img = resize_img(img)
 # Create a label to display the image
 image_label = tk.Label(root, image=img)
